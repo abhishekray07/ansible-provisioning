@@ -1,0 +1,10 @@
+---
+# tasks file for pip
+- name: pip install
+  become_user: sudo
+  pip:
+    name:
+      - ipdb
+      - ipython
+      - virtualenvwrapper
+    state: latest

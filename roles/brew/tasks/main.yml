@@ -1,0 +1,54 @@
+---
+# tasks file for brew
+- name: homebrew install
+  homebrew:
+    name:
+      - cask
+      - curl
+      - git
+      - gpg
+      - htop
+      - libffi
+      - libxml2
+      - librdkafka
+      - jq
+      - postgresql
+      - pstree
+      - python
+      - python3
+      - wget
+      - openssl
+      - tmux
+      - vim
+      - zsh
+      - zsh-syntax-highlighting
+    state: present
+    update_homebrew: yes
+    upgrade_all: yes
+
+- name: homebrew tap
+  homebrew_tap:
+    name={{ item }}
+    state=present
+  with_items:
+    - caskroom/fonts
+
+- name: homebrew cask install
+  become_user: sudo
+  homebrew_cask:
+    name={{ item }}
+    state=present
+  with_items:
+    - alfred
+    - docker
+    - flux
+    - font-hack-nerd-font
+    - google-chrome
+    - hammerspoon
+    - iterm2
+    - pycharm
+    - rescuetime
+    - skype
+    - slack
+    - spotify
+    - visual-studio-code

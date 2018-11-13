@@ -1,0 +1,21 @@
+- name: Ensures "{{ provisioning_dir }}" dir exists
+  file: path="~{{ provisioning_dir }}" state=directory
+
+- name: Installing dotfiles
+  git:
+    repo: "https://github.com/abhishekray07/dotfiles.git"
+    dest: "{{ provisioning_dir + '/dotfiles' }}"
+    update: yes
+
+- name: Create symlinks
+  file:
+    src: "{{ provisioning_dir }}/dotfiles/{{ item.src }}"
+    dest: "~/{{ item.dest }}"
+    state: link
+    follow: false
+  with_items:
+    - { src: ".hammerspoon", dest: ".hammerspoon" }
+    - { src: ".tmux.conf", dest: ".tmux.conf" }
+    - { src: ".tmux.conf.local", dest: ".tmux.conf.local" }
+    - { src: ".vimrc", dest: ".vimrc" }
+    - { src: ".zshrc", dest: ".zshrc" }

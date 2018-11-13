@@ -1,0 +1,9 @@
+- hosts: local
+  connection: local
+  vars:
+    provisioning_dir: ~/provisioning
+  roles:
+    # - brew
+    # - pip
+    # - zsh
+    - dotfiles

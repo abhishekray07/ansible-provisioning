@@ -1,0 +1,14 @@
+- name: Ensures "{{ provisioning_dir }}" dir exists
+  file: path="~{{ provisioning_dir }}" state=directory
+
+- name: Download zsh installer
+  get_url: 
+    url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh 
+    dest: "{{ provisioning_dir }}/zsh-installer.sh"
+    mode: 0755
+
+- name: Execute the zsh-installer.sh
+  shell: "{{ provisioning_dir }}/zsh-installer.sh"
+
+- name: Remove the zsh-installer.sh
+  file: path="{{ provisioning_dir }}/zsh-installer.sh" state=absent
